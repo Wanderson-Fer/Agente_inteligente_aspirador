@@ -15,7 +15,7 @@ class AgenteAspirador:
                          [1, 0, 0, 0]]
         # Inicializa a Q-table, que armazena valores Q para cada ação em cada estado
         self.q_table = {}
-        self.epsilon = 0.3  # Taxa de exploração inicial
+        self.epsilon = 0.6  # Taxa de exploração inicial
 
     def verificar_sujeira(self):
         x, y = self.localizacao
@@ -53,6 +53,9 @@ class AgenteAspirador:
         return self.bolsa == 10
 
     def atualizar_q_table(self, state, action, reward, next_state):
+        # O estado não considera a situação do ambiente (sujeira) apenas a localização
+        # Dessa forma o agente ganha a recompensa por ir a determindada posição e
+        # não por ir a determinada posição que contenha sujeira
         state = str(state)
         if state not in self.q_table:
             self.q_table[state] = [0, 0, 0, 0]  # Q-values for the four possible actions
